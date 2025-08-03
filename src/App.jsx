@@ -130,7 +130,7 @@ function App() {
     setError('');
     setGeneratedReply('');
     try {
-      const response = await axios.post('http://localhost:8080/api/email/generate', {
+      const response = await axios.post('https://emailcraftai-ten.vercel.app', {
         emailContent,
         tone,
       });

@@ -19,7 +19,6 @@ import axios from 'axios';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import MemoryIcon from '@mui/icons-material/Memory';
 
-// For setting document title (browser tab)
 function DocumentTitle({ title }) {
   React.useEffect(() => {
     document.title = title;
@@ -27,25 +26,23 @@ function DocumentTitle({ title }) {
   return null;
 }
 
-// -------- Dark theme with deep blue and cyan accents --------
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: { main: '#00bcd4' },       // cyan accent
-    secondary: { main: '#673ab7' },     // violet accent
-    background: { default: '#0a0f1a', paper: 'rgba(15, 23, 42, 0.75)' }, // deep blue-black
+    primary: { main: '#00bcd4' },
+    secondary: { main: '#673ab7' },
+    background: { default: '#0a0f1a', paper: 'rgba(15, 23, 42, 0.75)' },
     text: { primary: '#e0e6f1' },
   },
   typography: { fontFamily: 'Montserrat, sans-serif' },
 });
 
-// -------- Glassmorphic card --------
 const GlassCard = styled(motion.div)(({ theme }) => ({
-  background: 'rgba(15, 23, 42, 0.72)',  // dark bluish transparent
-  boxShadow: '0 8px 48px rgba(0, 188, 212, 0.5)', // cyan glow
+  background: 'rgba(15, 23, 42, 0.72)',
+  boxShadow: '0 8px 48px rgba(0, 188, 212, 0.5)',
   borderRadius: 22,
   backdropFilter: 'blur(20px)',
-  border: '1.8px solid rgba(0, 188, 212, 0.3)', // subtle cyan border
+  border: '1.8px solid rgba(0, 188, 212, 0.3)',
   padding: '3rem',
   maxWidth: 620,
   margin: 'auto',
@@ -55,16 +52,14 @@ const GlassCard = styled(motion.div)(({ theme }) => ({
   },
 }));
 
-// -------- Animated background with nebula and floating orbs --------
 const AnimatedBackground = styled('div')({
   position: 'fixed',
   inset: 0,
   overflow: 'hidden',
   zIndex: -1,
-  background: 'radial-gradient(circle at 20% 30%, #004c6d, #001014 90%)', // dark teal-blue gradient base
+  background: 'radial-gradient(circle at 20% 30%, #004c6d, #001014 90%)',
 });
 
-// -------- Floating blurred glowing orb --------
 const FloatingOrb = styled(motion.div)({
   position: 'absolute',
   borderRadius: '50%',
@@ -73,7 +68,6 @@ const FloatingOrb = styled(motion.div)({
   opacity: 0.7,
 });
 
-// -------- Subtle tech grid overlay --------
 const TechGrid = styled('svg')({
   position: 'fixed',
   inset: 0,
@@ -83,7 +77,6 @@ const TechGrid = styled('svg')({
   opacity: 0.07,
 });
 
-// -------- Custom Logo combining envelope + AI circuit --------
 function AppLogo() {
   return (
     <Box
@@ -117,6 +110,8 @@ function AppLogo() {
   );
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [emailContent, setEmailContent] = useState('');
   const [tone, setTone] = useState('');
@@ -130,7 +125,7 @@ function App() {
     setError('');
     setGeneratedReply('');
     try {
-      const response = await axios.post('https://emailcraftai-ten.vercel.app', {
+      const response = await axios.post(`${API_URL}/generate`, {
         emailContent,
         tone,
       });
@@ -147,7 +142,6 @@ function App() {
     setShowCopy(true);
   };
 
-  // Floating orbs positioned with delays for smooth floating effect
   const orbs = [
     { size: 140, top: '25%', left: '15%', animationDelay: '0s' },
     { size: 100, top: '60%', left: '45%', animationDelay: '6s' },
@@ -386,7 +380,6 @@ function App() {
         </Snackbar>
       </GlassCard>
 
-      {/* Developer credit line */}
       <Box sx={{ textAlign: 'center', mt: 2, mb: 2 }}>
         <Typography variant="caption" sx={{ color: 'rgba(224, 230, 241, 0.6)', fontWeight: 400 }}>
           Developed by Abhishek Hada
